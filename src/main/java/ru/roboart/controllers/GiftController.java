@@ -14,34 +14,37 @@ import ru.roboart.repositories.GiftRepository;
 @RestController
 @RequestMapping("/gift")
 public class GiftController extends MainRestController<Gift> {
-    private boolean isStart = false;
+    private boolean isStart = true;
 
+   
     @Autowired
-    GiftRepository giftRepository;
-
+    public GiftController(GiftRepository GiftRepository) {
+        repository = GiftRepository;
+    }
     @RequestMapping("/get")
-    public String getGift() throws RestException {
+    public Object getGift()  {
         if(isStart) {
             Gift gift = new Gift();
-            giftRepository.save(gift);
+            repository.save(gift);
             return gift.getCode();
 
         } else {
-
+/*
             RestException restException =  new RestException("msg");
             restException.setHttp_code(304);
             restException.setRequest_status(1);
             restException.setSystem_message("The gift is not available");
             restException.setUser_message("Подарок будет доступен в день проведения мероприятия, не пропустите!");
-            throw restException;
+            throw restException;*/
+            return new RestException(304, "Not modified", "The gift is not available");
         }
     }
   /*  @Autowired
-    EventRepository eventRepository;
+    GiftRepository GiftRepository;
 
     @RequestMapping("/list")
-    public List<Event> getList(@HeaderParam("timestamp") long timestamp) {
-        List<Event> eventList = eventRepository.findAll(new Sort())
+    public List<Gift> getList(@HeaderParam("timestamp") long timestamp) {
+        List<Gift> GiftList = GiftRepository.findAll(new Sort())
 
     }
 */

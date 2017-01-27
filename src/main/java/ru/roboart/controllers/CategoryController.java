@@ -14,14 +14,8 @@ import ru.roboart.repositories.CategoryRepository;
 @RequestMapping("/category")
 public class CategoryController extends MainRestController<Category> {
 
-
     @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
-    public CategoryController categoryController() {
-        CategoryController categoryController = new CategoryController();
-        categoryController.repository = categoryRepository;
-        return categoryController;
+    public CategoryController(CategoryRepository categoryRepository) {
+        repository = categoryRepository;
     }
 }

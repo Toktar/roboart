@@ -1,15 +1,48 @@
 package ru.roboart.models.exeptions;
 
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.util.NestedServletException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
-import javax.servlet.ServletException;
+import java.util.Date;
 
 /**
  * Created by Kida on 07.01.2017.
  */
-public class RestException extends NestedServletException {
-    private int request_status;
+
+
+public class RestException {
+
+
+    public long timestamp = new Date().getTime();
+    public long status = 500;
+    public String error = "Internal Server Error";
+    // private String exception = "Internal Server Error";
+    public String message = "Internal Server Error";
+    // private String path = "Internal Server Error";
+
+    public RestException(long status, String error, String message) {
+        this.status = status;
+        this.error = error;
+        this.message = message;
+    }
+
+    public RestException() {
+    }
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        try {
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
+
+    /*    private int request_status;
     private String user_message;
     private String system_message;
     private long http_code;
@@ -36,5 +69,5 @@ public class RestException extends NestedServletException {
 
     public void setHttp_code(long http_code) {
         this.http_code = http_code;
-    }
+    }*/
 }
