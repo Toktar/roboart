@@ -20,12 +20,22 @@ import java.util.List;
 public abstract class MainRestController<T> {
 
     PagingAndSortingRepository<T, Long> repository;
-    Date lastUpdate;
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    protected Date lastUpdate;
     @Autowired
     HttpServletResponse httpServletResponse;
 
     @RequestMapping("/list")
     public Object getList(@HeaderParam("timestamp") String timestamp) throws NestedServletException, IOException, IllegalAccessException {
+        
         long timestampLong = (timestamp == null || timestamp.isEmpty())?0:Long.parseLong(timestamp);
         if(lastUpdate==null) lastUpdate = new Date();
         long update =  lastUpdate.getTime();
