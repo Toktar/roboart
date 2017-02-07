@@ -5,33 +5,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.roboart.models.Category;
-import ru.roboart.repositories.CategoryRepository;
+import ru.roboart.models.MapImage;
+import ru.roboart.repositories.MapImageRepository;
 
 /**
  * Created by toktar.
  */
 
 @Controller
-@RequestMapping("/ui/category")
-public class ControllerCategory extends ControllerForView<Category>{
+@RequestMapping("/ui/map")
+public class ControllerMapImage extends ControllerForView<MapImage>{
 
 
-    private String name = "category";
+    private String name = "map";
     private String entityTitle = "Категории событий";
 
     @Autowired
-    public void config(CategoryRepository categoryRepository) {
-        repository = categoryRepository;
+    public void config(MapImageRepository mapRepository) {
+        repository = mapRepository;
     }
 
     @Override
-    protected String getTitle(Category entity) {
+    protected String getTitle(MapImage entity) {
         return entity.getTitle();
     }
 
     @Override
-    protected String getId(Category entity) {
+    protected String getId(MapImage entity) {
         return String.valueOf(entity.getId());
     }
 
@@ -51,27 +51,27 @@ public class ControllerCategory extends ControllerForView<Category>{
     public String greeting(Model model,
                            @RequestParam(value="operation", required=false, defaultValue="") String operation,
                            @RequestParam(value="title", required=false) String title,
-                           @RequestParam(value="color", required=false) String color,
+                           @RequestParam(value="image", required=false) String image,
                            @RequestParam(value="id", required=false) String id
     ) {
-        Category category = new Category();
-        category.setTitle(title);
-        category.setHexColor(color);
+        MapImage map = new MapImage();
+        map.setTitle(title);
+        map.setImage(image); 
         if(id!=null && !id.isEmpty()) {
-            category.setId(Long.parseLong(id));
-            if(!validate(title, color)) {
-                Category dbCategory = repository.findOne(Long.parseLong(id));
-                title = dbCategory.getTitle();
-                color = dbCategory.getHexColor();
+            map.setId(Long.parseLong(id));
+            if(!validate(title, image)) {
+                MapImage dbMapImage = repository.findOne(Long.parseLong(id));
+                title = dbMapImage.getTitle();
+                image = dbMapImage.getImage();
             }
         }
-        Category savedCategory = saveEntity(operation, category, model, validate(title,color));
-        if(savedCategory!=null) {
-            model.addAttribute("id", savedCategory.getId());
+        MapImage savedMapImage = saveEntity(operation, map, model, validate(title,image));
+        if(savedMapImage!=null) {
+            model.addAttribute("id", savedMapImage.getId());
         }
         StringBuilder fields = new StringBuilder();
         fields.append(fieldsDrawerService.generateTextbox("название","title", title==null?"":title));
-        fields.append(fieldsDrawerService.generateTextbox("цвет", "color", color==null?"":color));
+        fields.append(fieldsDrawerService.generateTextbox("ссылка на изображение ", "image", image==null?"":image));
 
         model.addAttribute("fields", fields.toString());
         model.addAttribute("entity", getName());
@@ -81,11 +81,11 @@ public class ControllerCategory extends ControllerForView<Category>{
 
 
 
-    private boolean validate(String title, String color) {
-        return title!=null && color!=null;
+    private boolean validate(String title, String image) {
+        return title!=null && image!=null;
     }
-    private boolean validate(String title, String color, String id) {
-        return title!=null && color!=null && id!=null && !id.isEmpty();
+    private boolean validate(String title, String image, String id) {
+        return title!=null && image!=null && id!=null && !id.isEmpty();
     }
 
 }

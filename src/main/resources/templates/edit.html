@@ -895,7 +895,7 @@
                 <input type="hidden" name="id"  th:value="${id}" />
 
                 <input id="saveForm" class="button_text" type="submit" name="submit" value="сохранить" />
-                <a th:href="/ui/${entity}/">К списку</a>
+                <a th:href="'/ui/' + ${entity} + '/list'">К списку</a>
             </li>
 
         </ul>

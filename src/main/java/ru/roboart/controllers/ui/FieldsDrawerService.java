@@ -25,8 +25,8 @@ public class FieldsDrawerService {
     public String generateItemInList(String itemTitle, String entityName, String itemId) {
         return " <li>\n" +
                 "            <p>" + itemTitle+ "</p> <br/>\n" +
-                "            <a href=\"/ui/" + entityName+ "/edit/?operation=edit&id=" + itemId+ "\">Редактировать   </a>\n" +
-                "            <a href=\"?operation=del&id=" + itemId+ "\">Удалить</a>\n" +
+                "            <a href=\"/ui/" + entityName+ "/edit/?operation=edit&id=" + itemId+ "\">Редактировать</a>\n" +
+                "            &nbsp;&nbsp;&nbsp;<a href=\"?operation=del&id=" + itemId+ "\">Удалить</a>\n" +
                 "        </li>";
     }
 

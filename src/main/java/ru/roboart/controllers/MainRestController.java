@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.NestedServletException;
 import ru.roboart.models.exeptions.RestException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.HeaderParam;
 import java.io.IOException;
@@ -32,6 +33,8 @@ public abstract class MainRestController<T> {
     protected Date lastUpdate;
     @Autowired
     HttpServletResponse httpServletResponse;
+    @Autowired
+    HttpServletRequest httpServletRequest;
 
     @RequestMapping("/list")
     public Object getList(@HeaderParam("timestamp") String timestamp) throws NestedServletException, IOException, IllegalAccessException {
@@ -49,6 +52,8 @@ public abstract class MainRestController<T> {
             restException.setSystem_message("Client data is topical");
             restException.setUser_message("");
 */
+         httpServletResponse.setStatus(304);
+        h
         return new RestException(304, "Not modified", "Client data is topical").toString();
     }
 

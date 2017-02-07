@@ -1,3 +1,4 @@
+/*
 package ru.roboart.controllers.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -5,33 +6,36 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.roboart.models.Category;
-import ru.roboart.repositories.CategoryRepository;
+import ru.roboart.models.Event;
+import ru.roboart.models.Event;
+import ru.roboart.repositories.EventRepository;
 
+*/
 /**
  * Created by toktar.
- */
+ *//*
+
 
 @Controller
-@RequestMapping("/ui/category")
-public class ControllerCategory extends ControllerForView<Category>{
+@RequestMapping("/ui/event")
+public class ControllerEvent extends ControllerForView<Event>{
 
 
-    private String name = "category";
-    private String entityTitle = "Категории событий";
+    private String name = "event";
+    private String entityTitle = "События";
 
     @Autowired
-    public void config(CategoryRepository categoryRepository) {
+    public void config(EventRepository categoryRepository) {
         repository = categoryRepository;
     }
 
     @Override
-    protected String getTitle(Category entity) {
+    protected String getTitle(Event entity) {
         return entity.getTitle();
     }
 
     @Override
-    protected String getId(Category entity) {
+    protected String getId(Event entity) {
         return String.valueOf(entity.getId());
     }
 
@@ -54,20 +58,25 @@ public class ControllerCategory extends ControllerForView<Category>{
                            @RequestParam(value="color", required=false) String color,
                            @RequestParam(value="id", required=false) String id
     ) {
-        Category category = new Category();
-        category.setTitle(title);
-        category.setHexColor(color);
+        Event event = new Event();
+        event.setTitle(title);
+        event.setDescription(description);
+        event.setDisplayedTime(displayedTime);
+        event.setEndTime(Long.parseLong(endTime));
+        event.setStartTime(Long.parseLong(startTime));
+        event.setLocation(location);
+
         if(id!=null && !id.isEmpty()) {
-            category.setId(Long.parseLong(id));
+            event.setId(Long.parseLong(id));
             if(!validate(title, color)) {
-                Category dbCategory = repository.findOne(Long.parseLong(id));
-                title = dbCategory.getTitle();
-                color = dbCategory.getHexColor();
+                Event dbEvent = repository.findOne(Long.parseLong(id));
+                title = dbEvent.getTitle();
+                color = dbEvent.getHexColor();
             }
         }
-        Category savedCategory = saveEntity(operation, category, model, validate(title,color));
-        if(savedCategory!=null) {
-            model.addAttribute("id", savedCategory.getId());
+        Event savedEvent = saveEntity(operation, event, model, validate(title,color));
+        if(savedEvent!=null) {
+            model.addAttribute("id", savedEvent.getId());
         }
         StringBuilder fields = new StringBuilder();
         fields.append(fieldsDrawerService.generateTextbox("название","title", title==null?"":title));
@@ -89,3 +98,4 @@ public class ControllerCategory extends ControllerForView<Category>{
     }
 
 }
+*/

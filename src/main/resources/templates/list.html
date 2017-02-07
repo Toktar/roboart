@@ -9,6 +9,9 @@
 
 
     <style type="text/css">
+        p {
+            margin: 5px;
+        }
         body
         {
             background:#333366;
@@ -886,7 +889,7 @@
     <div id="form_9748" class="appnitro" >
         <div class="form_description">
             <h2><b th:text="${entity_title}" /></h2>
-            <a href="/ui/${entity_name}/edit?operation=add" >Добавить</a>
+            <a th:href="'/ui/' + ${entity_name} + '/edit?operation=add'" >Добавить</a>
         </div>
 <ul id="placeForList">
     <h2 id="list" th:value="${list}"/>
