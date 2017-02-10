@@ -71,7 +71,7 @@ public class ControllerCategory extends ControllerForView<Category>{
         }
         StringBuilder fields = new StringBuilder();
         fields.append(fieldsDrawerService.generateTextbox("название","title", title==null?"":title));
-        fields.append(fieldsDrawerService.generateTextbox("цвет", "color", color==null?"":color));
+        fields.append(fieldsDrawerService.generateColorBox("цвет", "color", color==null?"":color));
 
         model.addAttribute("fields", fields.toString());
         model.addAttribute("entity", getName());

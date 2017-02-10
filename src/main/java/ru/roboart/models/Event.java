@@ -1,7 +1,6 @@
 package ru.roboart.models;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by toktar.
@@ -10,9 +9,9 @@ import java.util.Date;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private long startTime;
-    private long endTime;
+    private Long id;
+    private Long startTime;
+    private Long endTime;
     private String title;
     private String description;
     @ManyToOne
@@ -21,7 +20,7 @@ public class Event {
     private String location;
     private String map;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -29,7 +28,7 @@ public class Event {
         this.id = id;
     }
 
-    public long getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
@@ -37,7 +36,7 @@ public class Event {
         this.startTime = startTime;
     }
 
-    public long getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 

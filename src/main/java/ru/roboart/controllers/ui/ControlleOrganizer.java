@@ -78,7 +78,9 @@ public class ControlleOrganizer extends ControllerForView<Organizer>{
         }
         StringBuilder fields = new StringBuilder();
         fields.append(fieldsDrawerService.generateTextbox("название","title", title==null?"":title));
-        fields.append(fieldsDrawerService.generateTextbox("цвет", "icon", icon==null?"":icon));
+        fields.append(fieldsDrawerService.generateTextbox("логотип","icon", icon==null?"":icon));
+        fields.append(fieldsDrawerService.generateOrgCategoryList("категория","category", category==null?"":category));
+        fields.append(fieldsDrawerService.generateTextbox("ссылка для перехода","urlToTransition", urlToTransition==null?"":urlToTransition));
 
         model.addAttribute("fields", fields.toString());
         model.addAttribute("entity", getName());

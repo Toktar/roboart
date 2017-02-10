@@ -84,6 +84,13 @@ public abstract class ControllerForView<T> {
         return res;
     }
 
+    protected boolean validate(String... params) {
+        for (String param:params) {
+            if(param==null) return false;
+        }
+        return true;
+    }
+
     protected abstract String getTitle(T entity);
     protected abstract String getId(T entity);
     protected abstract String  getName();

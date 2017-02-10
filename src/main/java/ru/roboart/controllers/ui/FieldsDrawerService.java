@@ -14,19 +14,60 @@ public class FieldsDrawerService {
     Map<String, String> fieldNameMap = new HashMap();
 
     public String generateTextbox(String title, String name, String value) {
-        return " <li id=\"li_1\" >\n" +
-                "                <label class=\"description\" for=\""+name+"\">"+ title+" </label>\n" +
+        return " <li>\n" +
+                "                <label class=\"description\" for=\"" + name + "\">" + title + " </label>\n" +
                 "                <div>\n" +
-                "                    <input id=\""+name+"\" name=\""+name+"\" class=\"element text medium\" type=\"text\" maxlength=\"255\" value=\""+value+"\"/>\n" +
+                "                    <input id=\"" + name + "\" name=\"" + name + "\" class=\"element text medium\" type=\"text\" maxlength=\"255\" value=\"" + value + "\"/>\n" +
                 "                </div>\n" +
                 "            </li>";
     }
 
+    public String generateColorBox(String title, String name, String value) {
+        return " <li>\n" +
+                "                <label class=\"description\" for=\"" + name + "\">" + title + " </label>\n" +
+                "                <div>\n" +
+                "                    <input id=\"" + name + "\" name=\"" + name + "\" class=\"element text medium\" type=\"color\" value=\"" + value + "\"/>\n" +
+                "                </div>\n" +
+                "            </li>";
+    }
+
+
+    public String generateDataBox(String title, String name, String value) {
+        return " <li>\n" +
+                "                <label class=\"description\" for=\"" + name + "\">" + title + " </label>\n" +
+                "                <div>\n" +
+                "                    <input id=\"" + name + "\" name=\"" + name + "\" class=\"element text medium\" type=\"datetime-local\" value=\"" + value + "\"/>\n" +
+                "                </div>\n" +
+                "            </li>";
+    }
+
+    public String generateTextArea(String title, String name, String value) {
+        return " <li>\n" +
+                "                <label class=\"description\" for=\"" + name + "\">" + title + " </label>\n" +
+                "                <div>\n" +
+                "                    <input id=\"" + name + "\" name=\"" + name + "\" class=\"element text medium\" type=\"textarea\" value=\"" + value + "\"/>\n" +
+                "                </div>\n" +
+                "            </li>";
+    }
+
+    public String generateOrgCategoryList(String title, String name, String value) {
+        return " <li>\n" +
+                "                <label class=\"description\" for=\"" + name + "\">" + title + " </label>\n" +
+                "                <div>\n" +
+                "               <select id=\"" + name + "\" name=\"" + name + "\" class=\"element text medium\" type=\"textarea\" value=\"" + value + "\">\n" +
+                "                    <option "+("organizers".equals(value)?"selected=\"selected\"":"")+">organizers</option>\n" +
+                "                   <option>partners</option>\n" +
+                "               </select>" +
+                "                </div>\n" +
+                "            </li>";
+    }
+
+
     public String generateItemInList(String itemTitle, String entityName, String itemId) {
         return " <li>\n" +
-                "            <p>" + itemTitle+ "</p> <br/>\n" +
-                "            <a href=\"/ui/" + entityName+ "/edit/?operation=edit&id=" + itemId+ "\">Редактировать</a>\n" +
-                "            &nbsp;&nbsp;&nbsp;<a href=\"?operation=del&id=" + itemId+ "\">Удалить</a>\n" +
+                "            <p>" + itemTitle + "</p> <br/>\n" +
+                "            <a href=\"/ui/" + entityName + "/edit/?operation=edit&id=" + itemId + "\">Редактировать</a>\n" +
+                "            &nbsp;&nbsp;&nbsp;<a href=\"?operation=del&id=" + itemId + "\">Удалить</a>\n" +
                 "        </li>";
     }
 
