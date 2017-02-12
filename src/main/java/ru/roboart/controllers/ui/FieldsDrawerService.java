@@ -36,7 +36,8 @@ public class FieldsDrawerService {
         return " <li>\n" +
                 "                <label class=\"description\" for=\"" + name + "\">" + title + " </label>\n" +
                 "                <div>\n" +
-                "                    <input id=\"" + name + "\" name=\"" + name + "\" class=\"element text medium\" type=\"datetime-local\" value=\"" + value + "\"/>\n" +
+                "                    <input id=\"" + name + "\" class=\"data_view\" name=\"view_" + name + "\" class=\"element text medium\" type=\"datetime-local\" value=\"\" onchange=\"converterToTimestamp(this.value,this.id);\" />\n" +
+                "                    <input id=\"timestamp_" + name + "\" class=\"data\" name=\"" + name + "\" type=\"hidden\" value=\"" + value + "\" onchange=\"converterToData(this.value,this.name);\" />\n" +
                 "                </div>\n" +
                 "            </li>";
     }

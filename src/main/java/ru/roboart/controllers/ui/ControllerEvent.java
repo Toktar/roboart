@@ -92,8 +92,8 @@ public class ControllerEvent extends ControllerForView<Event> {
         fields.append(fieldsDrawerService.generateTextbox("название", "title", title == null ? "" : title));
         fields.append(fieldsDrawerService.generateTextArea("Описание", "description", description == null ? "" : description));
         fields.append(fieldsDrawerService.generateTextbox("время старта - конца мероприятия ", "displayedTime", displayedTime == null ? "" : displayedTime));
-        fields.append(fieldsDrawerService.generateTextbox("времени старта мероприятия", "startTime", startTime == null ? "" : startTime));
-        fields.append(fieldsDrawerService.generateTextbox("времени окончания мероприятия", "endTime", endTime == null ? "" : endTime));
+        fields.append(fieldsDrawerService.generateDataBox("времени старта мероприятия", "startTime", startTime == null ? "" : startTime));
+        fields.append(fieldsDrawerService.generateDataBox("времени окончания мероприятия", "endTime", endTime == null ? "" : endTime));
         fields.append(fieldsDrawerService.generateTextbox("место проведения", "location", location == null ? "" : location));
         fields.append(fieldsDrawerService.generateTextbox("карта места", "map", map == null ? "" : map));
         model.addAttribute("fields", fields.toString());

@@ -870,7 +870,19 @@
 
     </style>
 
+<script>
+    function converterToData (timestamp, name)
+    {
+        var date = new Date(timestamp*1000);
+        document.getElementById('timestamp_'+name).setAttribute('value', date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"T"+date.getHours()+":"+date.getMinutes()+"Z");
+    }
+    function converterToTimestamp (date, name)
+    {
+        var timestamp = new Date(date);
+        document.getElementById(name).setAttribute('value', timestamp.getTime().toString());
+    }
 
+</script>
 
 </head>
 <body id="main_body" >
