@@ -1,0 +1,54 @@
+<configuration scan="true">
+    <property resource="application.properties"/>
+
+    <property name="defaultPattern"
+              value="%date{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%X{version} %X{event_id}]- %msg%n"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/bg-integration-iss.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/bg-integration-iss-%d{yyyy-MM-dd}.zip</fileNamePattern>
+            <maxHistory>${log.maxHistory:-7}</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${defaultPattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <file>logs/bg-integration-iss-error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/bg-integration-iss-error-%d{yyyy-MM-dd}.zip</fileNamePattern>
+
+            <!-- keep ${serviceLog.maxHistory} days' worth of history, 7 by default -->
+            <maxHistory>${log.maxHistory:-7}</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${defaultPattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="FILE"/>
+        <queueSize>1024</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC"/>
+        <appender-ref ref="ERROR_FILE"/>
+    </root>
+
+    <logger name="ru" level="DEBUG">
+    </logger>
+
+</configuration>

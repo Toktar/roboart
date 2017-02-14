@@ -40,8 +40,9 @@ public abstract class MainRestController<T> {
 
     @RequestMapping("/list")
     public Object getList(@HeaderParam("timestamp") String timestamp, @HeaderParam("X-Private-Key") String token, HttpEntity<String> query) throws NestedServletException, IOException, IllegalAccessException {
-        token = query.getHeaders().get("x-private-key").get(0);
-        timestamp = query.getHeaders().get("timestamp").get(0);
+
+        token = (query.getHeaders().containsKey("x-private-key"))?query.getHeaders().get("x-private-key").get(0):null;
+        timestamp = (query.getHeaders().containsKey("timestamp"))?query.getHeaders().get("timestamp").get(0):null;
         if (token == null || !config.getAppToken().equals(token)) {
             httpServletResponse.setStatus(401);
             return new RestException(401, "Authentication error", "X-Private-Key is not correct").toString();

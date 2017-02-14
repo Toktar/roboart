@@ -1,5 +1,6 @@
 package ru.roboart.controllers.ui;
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.roboart.models.Category;
 import ru.roboart.repositories.CategoryRepository;
+
+import javax.ws.rs.core.Context;
 
 /**
  * Created by toktar.
@@ -49,22 +52,26 @@ public class ControllerCategory extends ControllerForView<Category>{
 
     @RequestMapping("/edit")
     public String greeting(Model model,
+                           @Context HttpServletRequest requestContext,
                            @RequestParam(value="operation", required=false, defaultValue="") String operation,
                            @RequestParam(value="title", required=false) String title,
                            @RequestParam(value="color", required=false) String color,
                            @RequestParam(value="id", required=false) String id
     ) {
+
+        id = validating(id);
         Category category = new Category();
-        category.setTitle(title);
-        category.setHexColor(color);
+
         if(id!=null && !id.isEmpty()) {
             category.setId(Long.parseLong(id));
             if(!validate(title, color)) {
                 Category dbCategory = repository.findOne(Long.parseLong(id));
-                title = dbCategory.getTitle();
-                color = dbCategory.getHexColor();
+                if (title == null) title = dbCategory.getTitle();
+                if (color == null) color = dbCategory.getHexColor();
             }
         }
+        category.setTitle(title);
+        category.setHexColor(color);
         Category savedCategory = saveEntity(operation, category, model, validate(title,color));
         if(savedCategory!=null) {
             model.addAttribute("id", savedCategory.getId());

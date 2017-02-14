@@ -5,7 +5,7 @@
 
 	<groupId>ru.roboart</groupId>
 	<artifactId>roboart</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.3.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>roboart</name>
@@ -91,6 +91,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.1</version>
         </dependency>
     </dependencies>
 

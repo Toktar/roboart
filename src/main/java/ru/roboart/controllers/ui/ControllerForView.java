@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.roboart.controllers.MainRestController;
+import ru.roboart.controllers.utils.UserController;
 
 import java.util.Date;
 import java.util.List;
@@ -41,6 +42,8 @@ public abstract class ControllerForView<T> {
 
     @Autowired
     protected FieldsDrawerService fieldsDrawerService;
+    @Autowired
+    protected UserController userController;
 
     @Autowired
     protected MainRestController<T> controller;
@@ -90,6 +93,15 @@ public abstract class ControllerForView<T> {
         }
         return true;
     }
+
+    protected String validating(String id) {
+        return id!=null?id.split(",")[0]:null;
+    }
+
+    protected boolean isAuth(String userIp) {
+        return userController.isAdmin(userIp);
+    }
+
 
     protected abstract String getTitle(T entity);
     protected abstract String getId(T entity);

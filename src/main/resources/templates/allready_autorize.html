@@ -33,7 +33,6 @@
         #form_container
         {
             background:#fff;
-
             padding: 5px;
             margin:0 auto;
             text-align:left;
@@ -900,14 +899,10 @@
             <a href="/user/logout">Выйти</a>
         </div>
         <div class="form_description">
-            <h2><b th:text="${entity_title}" /></h2>
-            <a th:href="'/ui/' + ${entity_name} + '/edit?operation=add'" >Добавить</a>
+            <h2>Вы авторизованы!</h2>
         </div>
-<ul id="placeForList">
-    <h2 id="list" th:value="${list}"/>
+        <a href="/ui/">Перейти на страницу со списком сущностей</a>
 
-
-</ul>
 
 
 
@@ -916,17 +911,13 @@
     <div id="footer">
         roboart 2017
         <ul id="menu">
-            <li> <a href="/ui/event/list">События</a></li>
-            <li> <a href="/ui/category/list">Категории событий</a></li>
-            <li> <a href="/ui/map/list">Карты</a></li>
-            <li> <a href="/ui/organizer/list">Организаторы</a></li>
-        </ul>
+        <li> <a href="/ui/event/list">События</a></li>
+        <li> <a href="/ui/category/list">Категории событий</a></li>
+        <li> <a href="/ui/map/list">Карты</a></li>
+        <li> <a href="/ui/organizer/list">Организаторы</a></li>
+    </ul>
     </div>
 </div>
-<script>
-    var value = document.getElementById('list').getAttribute('value');
-    document.getElementById('placeForList').innerHTML = value + document.getElementById('placeForList').innerHTML ;
-</script>
 </body>
 </html>
 

@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="view.css" media="all"/>
     <script type="text/javascript" src="view.js"></script>
 
+
     <style type="text/css">
         #menu {
             text-align: center;
@@ -19,6 +20,10 @@
             font-size: 100%;
         }
 
+        p {
+            margin: 5px;
+        }
+
         body {
             background: #333366;
             font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
@@ -29,7 +34,6 @@
 
         #form_container {
             background: #fff;
-
             padding: 5px;
             margin: 0 auto;
             text-align: left;
@@ -805,51 +809,6 @@
 
     </style>
 
-    <script>
-        function converterToData(timestamp, name) {
-            console.log(timestamp + ' ' + name);
-            var date = new Date(parseInt(timestamp));
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear();
-            var hours = date.getHours();
-            var minutes = date.getMinutes();
-
-            if (!(month > 9)) month = "0" + month;
-            if (!(day > 9)) day = "0" + day;
-            if (!(hours > 9)) hours = "0" + hours;
-            if (!(minutes > 9)) minutes = "0" + minutes;
-
-            var today = year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
-            console.log(today);
-            document.getElementById(name).value = today;
-        }
-        function converterToTimestamp(date, name) {
-
-            date += '+0300';
-            var timestamp = new Date(date);
-            if (!isNaN(timestamp.getTime())) {
-                document.getElementById('timestamp_' + name).setAttribute('value', timestamp.getTime().toString());
-            }
-        }
-        function setTimestamp() {
-            // document.getElementsByClassName('date_view').forEach(converterToTimestamp(this.value,this.id));
-            var els = document.getElementsByClassName("date_view");
-            [].forEach.call(els, function (el) {
-                converterToTimestamp(el.value, el.id)
-            });
-        }
-
-        function setDate() {
-
-            var els = document.getElementsByClassName("date");
-            [].forEach.call(els, function (el) {
-                converterToData(el.value, el.name)
-            });
-            //document.getElementsByClassName('date').forEach(converterToData(this.,this.name));
-        }
-
-    </script>
 
 </head>
 <body id="main_body">
@@ -857,45 +816,34 @@
 <div id="form_container">
 
 
-    <form id="form_9748" class="appnitro" enctype="multipart/form-data" method="POST" action=""
-          onsubmit="setTimestamp();">
-        <div class="" style="text-align: right;">
-            <a href="/user/logout">Выйти</a>
+
+        <div class="form_description">
+            <h2>Авторизация</h2>
         </div>
         <div class="form_description">
-            <h2 th:text="${operation}"/>
-            <h2 th:text="${status}"/>
+            <h2 th:text="${message}"/>
         </div>
-        <ul id="listOfField">
+        <form class="appnitro" enctype="multipart/form-data" method="post" action="">
 
-            <h2 id="fields" th:value="${fields}"/>
 
-            <li class="buttons">
-                <input type="hidden" name="id" th:value="${id}"/>
+            <label class="description" for="password">Пароль</label>
+            <input type="text" id="password" name="password"/>
 
-                <input id="saveForm" class="button_text" type="submit" name="submit" value="сохранить"/>
-                <a th:href="'/ui/' + ${entity} + '/list'">К списку</a>&nbsp;&nbsp;&nbsp;
-                <a th:href="'/ui/' + ${entity} + '/edit'">Добавить</a>
-            </li>
+            <input id="saveForm" class="button_text" type="submit" name="submit" value="сохранить"/>
 
-        </ul>
-    </form>
-    <div id="footer">
-        roboart 2017
-        <ul id="menu">
-            <li><a href="/ui/event/list">События</a></li>
-            <li><a href="/ui/category/list">Категории событий</a></li>
-            <li><a href="/ui/map/list">Карты</a></li>
-            <li><a href="/ui/organizer/list">Организаторы</a></li>
-        </ul>
-    </div>
+
+        </form>
+
+        <div id="footer">
+            roboart 2017
+            <ul id="menu">
+                <li><a href="/ui/event/list">События</a></li>
+                <li><a href="/ui/category/list">Категории событий</a></li>
+                <li><a href="/ui/map/list">Карты</a></li>
+                <li><a href="/ui/organizer/list">Организаторы</a></li>
+            </ul>
+        </div>
 </div>
-
-<script>
-    var value = document.getElementById('fields').getAttribute('value');
-    document.getElementById('listOfField').innerHTML = value + document.getElementById('listOfField').innerHTML;
-    setDate();
-</script>
 </body>
 </html>
 
